@@ -1,4 +1,4 @@
-name: dotnet test (std)
+name: dotnet test (using action)
 
 on: [push]
 
@@ -36,7 +36,7 @@ jobs:
           files: '**/*.trx'
           report_individual_runs: "true"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
         
       - name: Save Test Results as XML
         run: |
