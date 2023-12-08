@@ -27,9 +27,16 @@ jobs:
     
       - name: Test with dotnet
         run: dotnet test $SOLUTION --configuration $BUILD_CONFIG
+
+      - name: Publish Test Results
+        continue-on-error: true
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+          files: 'reports/report.xml'
+          report_individual_runs: "true"
   
       - name: Upload dotnet test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: dotnet-results          
-          path: TestResults
+          path: reports/
