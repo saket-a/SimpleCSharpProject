@@ -28,12 +28,17 @@ jobs:
     
       - name: Test with dotnet
         run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
-          
+
+      - name: Rename TRX to XML
+        run: |
+          find . -name "*.trx" -exec rename 's/\.trx$/.xml/' {} \;
+        working-directory: ${{ github.workspace }}
+        
       - name: Attach test results
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: "**/*.trx"
+          path: "**/*.xml"
           
       # - name: Download artifacts
       #   uses: actions/download-artifact@v2
