@@ -1,0 +1,51 @@
+name: dotnet test (std)
+
+on: [push]
+
+jobs:
+  build_and_test:
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: 'SimpleCSharpProject/SimpleCSharpProject.sln'
+      reportname: results
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+        
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+            dotnet-version: 6.x
+            
+      - name: Restore dependencies
+        run: dotnet restore $SOLUTION
+
+      - name: Build dot net
+        run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
+    
+      - name: Test with dotnet
+        run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
+
+      - name: Publish Test Results
+        continue-on-error: true
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        with:
+          files: '**/*.trx'
+          report_individual_runs: "true"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+      - name: Save Test Results as XML
+        run: |
+          mkdir -p xml-results
+          find . -name '*.trx' -exec trx2junit {} xml-results/results.xml \;
+        if: always()
+          
+      - name: upload artifacts
+        uses: actions/upload-artifact@v2
+        with:         
+          name: test-results
+          path: xml-results
