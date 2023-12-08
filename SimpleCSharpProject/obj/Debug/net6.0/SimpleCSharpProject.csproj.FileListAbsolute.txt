@@ -1,0 +1,14 @@
+C:\Users\ASUS\source\repos\SimpleCSharpProject\bin\Debug\net6.0\SimpleCSharpProject.exe
+C:\Users\ASUS\source\repos\SimpleCSharpProject\bin\Debug\net6.0\SimpleCSharpProject.deps.json
+C:\Users\ASUS\source\repos\SimpleCSharpProject\bin\Debug\net6.0\SimpleCSharpProject.runtimeconfig.json
+C:\Users\ASUS\source\repos\SimpleCSharpProject\bin\Debug\net6.0\SimpleCSharpProject.dll
+C:\Users\ASUS\source\repos\SimpleCSharpProject\bin\Debug\net6.0\SimpleCSharpProject.pdb
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.AssemblyInfoInputs.cache
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.AssemblyInfo.cs
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.dll
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\refint\SimpleCSharpProject.dll
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.pdb
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\SimpleCSharpProject.genruntimeconfig.cache
+C:\Users\ASUS\source\repos\SimpleCSharpProject\obj\Debug\net6.0\ref\SimpleCSharpProject.dll
