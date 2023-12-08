@@ -27,22 +27,25 @@ jobs:
         run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
     
       - name: Test with dotnet
-        run: dotnet test $SOLUTION --configuration $BUILD_CONFIG
+        run: |
+          dotnet test $SOLUTION --configuration $BUILD_CONFIG --no-build --logger trx
+          dotnet tool install --global trx2json
+          trx2json ./SimpleCSharpProject.Test/TestResults/*.trx --output ./test-results.json
 
       - name: Attach test results
         uses: actions/upload-artifact@v2
         with:
-          name: results
-          path: target/nunit-reports
+          name: test-results
+          path: ./test-results.json
           
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:         
-          path: target/surefire-reports/
+      # - name: Download artifacts
+      #   uses: actions/download-artifact@v2
+      #   with:         
+      #     path: target/surefire-reports/
           
-      - name: Publish Test Results
-        continue-on-error: true
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        with:
-          files: target/surefire-reports/*.xml
-          report_individual_runs: "true"
+      # - name: Publish Test Results
+      #   continue-on-error: true
+      #   uses: EnricoMi/publish-unit-test-result-action/composite@v1
+      #   with:
+      #     files: target/surefire-reports/*.xml
+      #     report_individual_runs: "true"
