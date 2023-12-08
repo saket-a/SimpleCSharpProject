@@ -3,7 +3,11 @@ name: dotnet test
 on: [push]
 
 jobs:
-  build:
+  build_and_test:
+    env:
+      BUILD_CONFIG: 'Release'
+      SOLUTION: 'SimpleCSharpProject/SimpleCSharpProject.sln'
+    
     runs-on: ubuntu-latest
 
     steps:
@@ -11,18 +15,18 @@ jobs:
         uses: actions/checkout@v2
         
       - name: Setup dotnet
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: 6.0
+            dotnet-version: 6.x
             
-      - name: Install dependencies
-        run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore $SOLUTION
 
       - name: Build dot net
-        run: dotnet build "SimpleCSharpProject/SimpleCSharpProject.csproj" -c Release
+        run: dotnet build $SOLUTION --configuration $BUILD_CONFIG
     
       - name: Test with dotnet
-        run: dotnet test --configuration Release --no-build SimpleCSharpProject.Test/SimpleCSharpProject.Test.csproj
+        run: dotnet test $SOLUTION --configuration $BUILD_CONFIG
   
       - name: Upload dotnet test results
         uses: actions/upload-artifact@v3
