@@ -31,7 +31,7 @@ jobs:
 
       - name: Rename TRX to XML
         run: |
-          find . -name "*.trx" -exec rename 's/\.trx$/.xml/' {} \;
+          find . -name "*.trx" -exec sh -c 'mv "$1" "${1%.trx}.xml"' _ {} \;
         working-directory: ${{ github.workspace }}
         
       - name: Attach test results
