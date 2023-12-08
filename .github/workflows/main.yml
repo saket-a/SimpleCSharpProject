@@ -19,7 +19,7 @@ jobs:
         run: dotnet restore
 
       - name: Build dot net
-        run: dotnet build --configuration Release SimpleCSharpProject/SimpleCSharpProject.csproj
+        run: dotnet build "SimpleCSharpProject/SimpleCSharpProject.csproj" -c Release
     
       - name: Test with dotnet
         run: dotnet test --configuration Release --no-build SimpleCSharpProject.Test/SimpleCSharpProject.Test.csproj
