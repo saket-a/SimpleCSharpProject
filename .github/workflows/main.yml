@@ -28,18 +28,12 @@ jobs:
     
       - name: Test with dotnet
         run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
-
-      - name: Convert TRX to JSON
-        run: |
-          sudo apt-get -y install python3
-          sudo python3 -m pip install trx2json
-          trx2json test-results.trx --output test-results.json
           
       - name: Attach test results
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: ./test-results.json
+          path: "**/*.trx"
           
       # - name: Download artifacts
       #   uses: actions/download-artifact@v2
