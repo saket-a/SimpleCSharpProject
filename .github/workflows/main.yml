@@ -33,16 +33,16 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: results
-          path: reports/
+          path: target/nunit-reports
           
       - name: Download artifacts
         uses: actions/download-artifact@v2
         with:         
-          path: reports/
+          path: target/surefire-reports/
           
       - name: Publish Test Results
         continue-on-error: true
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         with:
-          files: reports/*.xml
+          files: target/surefire-reports/*.xml
           report_individual_runs: "true"
