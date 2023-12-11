@@ -35,11 +35,6 @@ jobs:
       - name: Test with dotnet
         run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
           
-      # - name: Download test reults
-      #   uses: actions/download-artifact@v2
-      #   with:
-      #     path: test-results/json/
-          
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
         id: test-results
@@ -51,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: "**/*.xml"
+          path: "/home/runner/work/SimpleCSharpProject/SimpleCSharpProject/SimpleCSharpProject.Test/TestResults/test-results.trx"
           
       - name: Conclusion
         run: echo "Conclusion is ${{ fromJSON( steps.test-results.outputs.json ).conclusion }}"
