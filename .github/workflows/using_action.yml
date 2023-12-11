@@ -30,22 +30,17 @@ jobs:
         run: dotnet test $SOLUTION --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Publish Test Results
-        continue-on-error: true
         uses: EnricoMi/publish-unit-test-result-action@v2
-        with:
-          files: '**/*.trx'
-          report_individual_runs: "true"
-        env:
-          GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
-        
-      - name: Save Test Results as XML
-        run: |
-          mkdir -p xml-results
-          find . -name '*.trx' -exec trx2junit {} xml-results/results.xml \;
+        id: test-results
         if: always()
-          
+        with:
+          files: "test-results/**/*.xml"
+
+      - name: Conclusion
+        run: echo "Conclusion is ${{ fromJSON( steps.test-results.outputs.json ).conclusion }}"
+  
       - name: upload artifacts
         uses: actions/upload-artifact@v2
         with:         
           name: test-results
-          path: xml-results
+          path: test-results/**/*.xml
